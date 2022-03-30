@@ -26,3 +26,23 @@
         **(여러 종류의 값을 전달해야 하는 경우에는 객체로 통째로 전달하는 편이 나중에 성능 최적화를 할 때 편리함)**
 5.  조건부 스타일링을 위해 TodoListItem에서 classnames를 사용하여 작성
 6.  App에서 전달해 준 todos 값에 따라 다른 내용을 제대로 보여줌
+
+### 2. 항목 추가 기능 구현하기
+
+> TodoInsert 컴포넌트에서 인풋상태를 관리하고 App 컴포넌트에는 todos 배열에 새로운 객체를 추가하는 함수를
+> 생성해주어야함
+
+1. useState를 사용하여 value라는 상태를 정의
+2. input에 넣어줄 onChange 함수를 작성
+    - 컴포넌트가 리렌더링될 때마다 함수를 새로 만드는 것이 아닌, 한 번 함수를 만들고 재사용할 수 있도록 `useCallback` Hook을 사용
+3. todos 배열에 새 객체 추가를 위해 App 컴포넌트에서 todos 배열에 새 객체를 추가하는 onInsert 함수 생성
+    - id 값은 `useRef`를 사용하여 관리
+      **(id값은 렌더링되는 정보가 아니기 때문에 리렌더링될 필요가 없어서 useRef를 사용)**
+    - 성능을 아낄 수 있도록 useCallback으로 감싸주기
+      **(props로 전달해야할 함수를 만들 때는 useCallback을 사용하여 함수를 감싸주는 것을 습관화 해야함)**
+4. onInsert함수를 만든 뒤에는 해당 함수를 TodoInsert 컴포넌트의 props로 설정
+5. TodoInsert에서 받아온 onInsert 함수를 현재 useState를 통해 관리하고 있는 value 값을 파라미터로 넣어서 호출
+6. onSubit 이라는 함수를 만들고, 이를 form의 onSubmit으로 설정
+    - 이 함수가 호출되면 props로 받아 온 onInsert 함수에 현재 value 값을 파라미터로 넣어서 호출하고, 현재 value 값을 초기화함
+    - onSubmit 이벤트는 브라우저를 새로고침 시키기 때문에 `e.preventDefault()` 함수를 호출하여 새로고침을 방지
+    - onSubmit 대신 버튼의 onClick 이벤트로도 충분히 처리 가능
