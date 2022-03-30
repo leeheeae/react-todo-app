@@ -22,29 +22,23 @@ const App = () => {
     //고유값으로 사용 될 id
     const nextId = useRef(2501);
 
-    const onInsert = useCallback(
-        (text) => {
-            const todo = {
-                id: nextId.current,
-                text,
-                checked: false,
-            };
-            setTodos(todos.concat(todo));
-            nextId.current += 1; //nextId 1씩 더하기
-        },
-        [todos]
-    );
+    const onInsert = useCallback((text) => {
+        const todo = {
+            id: nextId.current,
+            text,
+            checked: false,
+        };
+        setTodos((todos) => todos.concat(todo));
+        nextId.current += 1; //nextId 1씩 더하기
+    }, []);
 
-    const onRemove = useCallback(
-        (id) => {
-            setTodos(todos.filter((todo) => todo.id !== id));
-        },
-        [todos]
-    );
+    const onRemove = useCallback((id) => {
+        setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    }, []);
 
     const onToggle = useCallback(
         (id) => {
-            setTodos(
+            setTodos((todos) =>
                 todos.map((todo) =>
                     todo.id === id ? { ...todo, checked: !todo.checked } : todo
                 )

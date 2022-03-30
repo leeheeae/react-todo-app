@@ -93,3 +93,5 @@ const onIncrease = useCallback(
     []
 );
 ```
+
+-   `setNumber(number+1)`가 아닌 위 코드처럼 업데이트
