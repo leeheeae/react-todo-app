@@ -15,7 +15,7 @@
 
 ---
 
-### App에서 Todos 상태 사용하기
+### 1. App에서 Todos 상태 사용하기
 
 1.  일정 항목에 대한 상태들은 모두 App 컴포넌트에서 관리
 2.  App에서 useState를 사용하여 todos 라는 상태를 정의하고, todos를 TodoList의 props로 전달
@@ -74,9 +74,19 @@
 
 -   '할일1' 항목을 체크할 경우 App 컴포넌트의 state가 변경되면서 App 컴포넌트가 리렌더링된다. 부모 컴포넌트가 리렌더링 되어 TodoList컴포넌트가 리렌더링되고 그 안의 무수한 컴포넌트들도 리렌더링된다.
 -   '할일1' 항목만 리렌더링 되면 되지만 현재 나머지 항목들도 리렌더링되어 성능이 저하되고 있음
+-   todoos 배열이 업데이트되면 onRemove와 onToggle 함수도 새롭게 바뀐다.
 
 **React.memo를 이용하여 성능최적화**
 
 -   컴포넌트의 props가 바뀌지 않았다면, 리렌더링하지 않도록 설정하여 함수형 컴포넌트의 리렌더링 성능을 최적화해 줄 수 있다.
 -   컴포넌트를 만들고 나서 감싸주기만 하면 됨
 -   `export default React.memo(TodoListItem);`
+
+**useState의 함수형 업데이트**
+
+-   setTodos를 사용할 때 새로운 상태를 파라미터로 넣는 대신, 상태 업데이트를 어떻게 할지 정의해 주는 업데이트 함수를 넣을 수 있다. (함수형 업데이트)
+
+```
+const [number, setNumber] = useState(0);
+const onIncrease = useCallback(()=> setNumber(prevNumber => prevNumber + 1), [])
+```
