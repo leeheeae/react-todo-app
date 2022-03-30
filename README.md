@@ -86,7 +86,10 @@
 
 -   setTodos를 사용할 때 새로운 상태를 파라미터로 넣는 대신, 상태 업데이트를 어떻게 할지 정의해 주는 업데이트 함수를 넣을 수 있다. (함수형 업데이트)
 
-```
+```javascript
 const [number, setNumber] = useState(0);
-const onIncrease = useCallback(()=> setNumber(prevNumber => prevNumber + 1), [])
+const onIncrease = useCallback(
+    () => setNumber((prevNumber) => prevNumber + 1),
+    []
+);
 ```
