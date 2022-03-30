@@ -46,3 +46,18 @@
     - 이 함수가 호출되면 props로 받아 온 onInsert 함수에 현재 value 값을 파라미터로 넣어서 호출하고, 현재 value 값을 초기화함
     - onSubmit 이벤트는 브라우저를 새로고침 시키기 때문에 `e.preventDefault()` 함수를 호출하여 새로고침을 방지
     - onSubmit 대신 버튼의 onClick 이벤트로도 충분히 처리 가능
+    - onSubmit을 이용하는 이유는 onKeyPerss 이벤트를 통해 enter를 감지하는 로직이 실행되기 때문에 간편하여 사용
+
+### 3. 지우기 기능 구현
+
+> 리액트 컴포넌트에서 배열의 불변성을 지키면서 배열 원소를 제거해야할 경우, 배열 내장 함수인 filter를 사용하면 간편하게 작성 가능
+
+1. App 컴포넌트에 id를 파라미터로 받아와서 같은 id를 가진 항목을 todos 배열에서 지우는 함수를 생성
+2. TodoList의 props로 넘기고 TodoList에서 TodoListItem에 props로 넘겨줌
+3. TodoListItem에서 todo의 id 값을 받고 onRemove 함수에 id 값을 넣어 삭제함수를 호출해준다.
+
+### 4. 수정 기능 구현
+
+1. onToggle 이라는 함수를 App에 만들고, 해당 함수를 TodoList 컴포넌트에게 props로 넣어준다.
+2. TodoList를 통해 TodoListItem까지 전달
+3. onClick 이벤트로 onToggle 호출
